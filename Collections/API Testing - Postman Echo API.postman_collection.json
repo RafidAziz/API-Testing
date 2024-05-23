@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "d0471b6b-fad2-4737-941f-293ab2fed408",
+		"name": "API Testing - Postman Echo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34303852"
+	},
+	"item": [
+		{
+			"name": "Test GET response",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
