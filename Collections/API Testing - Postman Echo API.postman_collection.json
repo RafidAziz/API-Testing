@@ -43,6 +43,73 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test GET with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body",
+							"let responseJson = pm.response.json();",
+							"",
+							"// Check if the response status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the response body has the correct structure",
+							"pm.test(\"Response has args object\", function () {",
+							"    pm.expect(responseJson).to.have.property('args');",
+							"});",
+							"",
+							"// Validate the response body contains the correct query parameters",
+							"pm.test(\"Response contains correct query parameters\", function() {",
+							"    pm.expect(responseJson.args).to.have.property('key1', 'value1');",
+							"    pm.expect(responseJson.args).to.have.property('key2', 'value2');",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "postman-echo.com/get?key1=value1&key2=value2",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "key1",
+							"value": "value1"
+						},
+						{
+							"key": "key2",
+							"value": "value2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
