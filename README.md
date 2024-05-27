@@ -9,5 +9,10 @@ Tech Stack:
 - JSON
 - Javascript
 
+Test Cases Completed:
+- GET response
+- GET response with parameters
+- POST response with parameters
+
 Current Task:
-- Add POST response test case
+- Add PATCH response test case
