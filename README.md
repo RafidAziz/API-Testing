@@ -1,5 +1,5 @@
 # API-Testing
-This repository showcases my API testing capabilities.
+This repository showcases my API testing capabilities on Postman Echo API.
 
 It is an ongoing work in progress.
 
