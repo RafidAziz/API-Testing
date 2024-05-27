@@ -110,6 +110,74 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test POST response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseBody = pm.response.json();",
+							"",
+							"// check for status code 200",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Convert query parameters object to a string for easier comparison",
+							"let queryParamsString = JSON.stringify(queryParams);",
+							"",
+							"// Convert response body to a string for easier comparison",
+							"let responseBodyString = JSON.stringify(responseBody);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function() {",
+							"    Object.keys(queryParams).forEach(function(key) {",
+							"        pm.expect(responseBodyString).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/post?user1=rafid1&user2=rafid2&user3=rafid3",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "user1",
+							"value": "rafid1"
+						},
+						{
+							"key": "user2",
+							"value": "rafid2"
+						},
+						{
+							"key": "user3",
+							"value": "rafid3"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
