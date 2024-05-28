@@ -132,6 +132,16 @@
 							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
 							"    });",
 							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
 							""
 						],
 						"type": "text/javascript",
@@ -164,6 +174,66 @@
 						{
 							"key": "user3",
 							"value": "rafid3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test PUT response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function () {",
+							"    Object.keys(queryParams).forEach(function (key) {",
+							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/put?test=put request",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"put"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "put request"
 						}
 					]
 				}
