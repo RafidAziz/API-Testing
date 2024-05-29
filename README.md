@@ -22,5 +22,13 @@ Test Cases Completed:
 - PUT response with parameters
 - PATCH response with parameters
 
+Backlog (subject to changes):
+- Authentication / Authorization test cases
+- Input validation test cases
+- Load testing test cases
+- Security testing test cases
+- Pagination test case
+- Sorting test case
+
 Current Task:
 - Add DELETE response test case
