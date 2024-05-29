@@ -20,6 +20,7 @@ Test Cases Completed:
 - GET response with parameters
 - POST response with parameters
 - PUT response with parameters
+- PATCH response with parameters
 
 Current Task:
-- Add PATCH response test case
+- Add DELETE response test case
