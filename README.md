@@ -21,7 +21,9 @@ Test Cases Completed:
 - POST response with parameters
 - PUT response with parameters
 - PATCH response with parameters
-- DELETE response test case
+- DELETE response 
+- Valid basic authentication
+- Invalid basic authentication
 
 Backlog (subject to changes):
 - Input validation test cases
@@ -31,5 +33,6 @@ Backlog (subject to changes):
 - Sorting test case
 
 Current Task:
-- Authentication / Authorization test case
+- Valid authorization test case
+- Invalid authorization test case
 
