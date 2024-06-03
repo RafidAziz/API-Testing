@@ -24,6 +24,8 @@ Test Cases Completed:
 - DELETE response 
 - Valid basic authentication
 - Invalid basic authentication
+- Valid digest authentication
+- Invalid digest authentication
 
 Backlog (subject to changes):
 - Input validation test cases
@@ -33,6 +35,5 @@ Backlog (subject to changes):
 - Sorting test case
 
 Current Task:
-- Valid authorization test case
-- Invalid authorization test case
-
+- Valid hawk authentication
+- Invalid hawk authentication
