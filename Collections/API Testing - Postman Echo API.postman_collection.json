@@ -616,6 +616,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Valid Hawk Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"User is authenticated. Response body contains 'Hawk Authentication Successful' message\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.json()).to.deep.include({ message: \"Hawk Authentication Successful\" });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "hawk",
+					"hawk": [
+						{
+							"key": "authKey",
+							"value": "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn",
+							"type": "string"
+						},
+						{
+							"key": "authId",
+							"value": "dh37fgj492je",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "sha256",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/auth/hawk",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"auth",
+						"hawk"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
