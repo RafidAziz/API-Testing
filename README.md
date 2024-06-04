@@ -26,6 +26,7 @@ Test Cases Completed:
 - Invalid basic authentication
 - Valid digest authentication
 - Invalid digest authentication
+- Valid hawk authentication
 
 Backlog (subject to changes):
 - Input validation test cases
@@ -35,5 +36,4 @@ Backlog (subject to changes):
 - Sorting test case
 
 Current Task:
-- Valid hawk authentication
 - Invalid hawk authentication
