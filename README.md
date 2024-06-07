@@ -3,10 +3,9 @@ This repository showcases my API testing capabilities on Postman Echo API.
 
 It is an ongoing work in progress.
 
-[![Watch the video]()](https://1drv.ms/v/s!AhnZcidRmS6h7059uh2rXyYUf12k?e=NhuAXG)
+Collection Execution Demo:
 
-[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/vt5fpE0bzSY)
-
+https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a575-ebb1e108317b
 
 Execution Instructions:
 - Open Postman
