@@ -3,6 +3,11 @@ This repository showcases my API testing capabilities on Postman Echo API.
 
 It is an ongoing work in progress.
 
+[![Watch the video]()](https://1drv.ms/v/s!AhnZcidRmS6h7059uh2rXyYUf12k?e=NhuAXG)
+
+[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/vt5fpE0bzSY)
+
+
 Execution Instructions:
 - Open Postman
 - Import collection 'API Testing - Postman Echo API.postman_collection.json'
