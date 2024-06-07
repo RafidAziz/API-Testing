@@ -28,6 +28,8 @@ Test Cases Completed:
 - Invalid digest authentication
 - Valid hawk authentication
 - Invalid hawk authentication
+- Valid OAuth1.0a authentication
+- Invalid OAuth1.0a authentication
 
 Backlog (subject to changes):
 - Input validation test cases
@@ -37,5 +39,5 @@ Backlog (subject to changes):
 - Sorting test case
 
 Current Task:
-- Valid OAuth1.0a authentication
-- Invalid OAuth1.0a authentication
+- Valid Set Cookies
+- Invalid Set Cookies
