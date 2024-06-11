@@ -911,6 +911,137 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Set Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are set correctly\", function () {",
+							"    var cookie1 = pm.environment.get(\"cookie1\");",
+							"    var value1 = pm.environment.get(\"value1\");",
+							"    var cookie2 = pm.environment.get(\"cookie2\");",
+							"    var value2 = pm.environment.get(\"value2\");",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.cookies[cookie1]).to.eql(value1);",
+							"    pm.expect(jsonData.cookies[cookie2]).to.eql(value2);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"cookie1\", \"rafidkey1\");",
+							"pm.environment.set(\"value1\", \"rafidvalue1\");",
+							"",
+							"pm.environment.set(\"cookie2\", \"rafidkey2\");",
+							"pm.environment.set(\"value2\", \"rafidvalue2\");",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/set?rafidkey1=rafidvalue1&rafidkey2=rafidvalue2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"set"
+					],
+					"query": [
+						{
+							"key": "rafidkey1",
+							"value": "rafidvalue1"
+						},
+						{
+							"key": "rafidkey2",
+							"value": "rafidvalue2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Get Cookies",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.request.headers.add({ key: 'Cookie', value: 'rafidkey1=rafidvalue1; rafidkey2=rafidvalue2' });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are correct\", function () {",
+							"    // Retrieve the cookies from the response",
+							"    const responseCookies = pm.response.json().cookies;",
+							"",
+							"    // Define the expected cookies",
+							"    const expectedCookies = {",
+							"        \"rafidkey1\": \"rafidvalue1\",",
+							"        \"rafidkey2\": \"rafidvalue2\"",
+							"    };",
+							"",
+							"    // Iterate through the expected cookies and check each one",
+							"    Object.keys(expectedCookies).forEach(function(key) {",
+							"        pm.expect(responseCookies[key]).to.eql(expectedCookies[key]);",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
