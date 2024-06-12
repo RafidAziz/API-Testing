@@ -1042,6 +1042,110 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Delete Existing Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are deleted correctly\", function () {",
+							"    // Retrieve cookies from the response",
+							"    var cookie1 = pm.cookies.get('rafidkey1');",
+							"    var cookie2 = pm.cookies.get('rafidkey2');",
+							"",
+							"    // Assert that cookies are not present",
+							"    pm.expect(cookie1).to.be.undefined;",
+							"    pm.expect(cookie2).to.be.undefined;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/delete?rafidkey1&rafidkey2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "rafidkey1",
+							"value": null
+						},
+						{
+							"key": "rafidkey2",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Delete Non-Existent Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"No cookies deleted as the provided key is non-existent\", function () {",
+							"    // Retrieve cookies from the response",
+							"    var cookie1 = pm.cookies.get('invalidkey1');",
+							"",
+							"    // Assert that cookies are not present",
+							"    pm.expect(cookie1).to.be.undefined;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/delete?invalidkey1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "invalidkey1",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
