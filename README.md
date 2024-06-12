@@ -36,6 +36,8 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Invalid OAuth1.0a authentication
 - Set Cookies
 - Get Cookies
+- Delete Existing Cookies
+- Delete Non-Existent Cookies
 
 ## Backlog (subject to changes)
 - Input validation test cases
@@ -45,4 +47,4 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Sorting test case
 
 ## Current Task
-- Delete Cookies
+- Various common status codes
