@@ -38,6 +38,10 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Get Cookies
 - Delete Existing Cookies
 - Delete Non-Existent Cookies
+- Response Status Code 200
+- Response Status Code 400
+- Response Status Code 401
+- Response Status Code 404
 
 ## Backlog (subject to changes)
 - Input validation test cases
