@@ -1310,6 +1310,56 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Streamed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has chunked transfer encoding header\", function () {",
+							"    pm.response.to.have.header('transfer-encoding', 'chunked');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "POST https://postman-echo.com/post\nContent-Type: application/json\n\n{\n  \"large_payload\": \"a\" * 1000000\n  \"test\": 0 / 0\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/stream/5",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"stream",
+						"5"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
