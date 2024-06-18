@@ -1360,6 +1360,102 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Valid Delay Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var _ = require('lodash');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has valid json body\", function () {",
+							"    pm.response.to.have.jsonBody('delay');",
+							"});",
+							"",
+							"// additional sanity tests",
+							"pm.test(\"Request must have a valid delay (1-9)\", function () {",
+							"    pm.expect(Number(_.get(pm.request, 'url.path[1]'))).to.be.above(0).and.below(10);",
+							"});",
+							"pm.test(\"Response should take more time than the delay specified\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(Number(_.get(pm.request, 'url.path[1]')));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/delay/2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Delay Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var _ = require('lodash');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has valid json body\", function () {",
+							"    pm.response.to.have.jsonBody('delay');",
+							"});",
+							"",
+							"// additional sanity tests",
+							"pm.test(\"Request contains invalid delay (<1 OR >9)\", function () {",
+							"    pm.expect(Number(_.get(pm.request, 'url.path[1]'))).to.be.below(1).and.above(9);",
+							"});",
+							"pm.test(\"Response should take more time than the delay specified\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(Number(_.get(pm.request, 'url.path[1]')));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/delay/0",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"0"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
