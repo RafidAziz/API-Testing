@@ -42,13 +42,15 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Response Status Code 400
 - Response Status Code 401
 - Response Status Code 404
+- Streamed Response
+- Valid Delay Response
+- Invalid Delay Response
 
 ## Backlog (subject to changes)
 - Input validation test cases
-- Load testing test cases
 - Security testing test cases
 - Pagination test case
 - Sorting test case
 
 ## Current Task
-- Various common status codes
+- Load testing test case
