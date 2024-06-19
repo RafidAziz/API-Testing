@@ -45,12 +45,11 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Streamed Response
 - Valid Delay Response
 - Invalid Delay Response
+- Invalid Sorted Data Response
 
 ## Backlog (subject to changes)
 - Input validation test cases
 - Security testing test cases
-- Pagination test case
-- Sorting test case
 
 ## Current Task
-- Load testing test case
+- Pagination test case
