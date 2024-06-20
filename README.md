@@ -52,4 +52,5 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Security testing test cases
 
 ## Current Task
-- Pagination test case
+- Invalid pagination test case
+  - Assert parameter value is greater than 100
