@@ -1517,6 +1517,192 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test Valid Pagination Response (10 Items)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extracting response data",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Parse the request URL",
+							"var queryParams = pm.request.url.query.toObject();",
+							"",
+							"// Get total items",
+							"var totalItems = pm.response.headers.get('x-total-count');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check request contains limit <= 'x-total-count'",
+							"pm.test(\"Request contains limit value <= total items\", function () {",
+							"    var limitValue = parseInt(queryParams['_limit'], 10);",
+							"    pm.expect(limitValue).to.be.below(parseInt(totalItems, 10));",
+							"});",
+							"",
+							"// Check if the response is an array (list of items)",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});",
+							"",
+							"// Check if the number of items is equal to the limit specified",
+							"pm.test(\"Response contains 10 items\", function () {",
+							"    pm.expect(jsonData.length).to.eql(parseInt(queryParams['_limit'], 10));",
+							"});",
+							"",
+							"// Check for pagination headers or elements (if any)",
+							"var totalItems = pm.response.headers.get('x-total-count'); // Simulated header for total items",
+							"var currentPage = 1; // Page number we requested",
+							"",
+							"// Assert total items header is present",
+							"pm.test(\"Total items header is present\", function () {",
+							"    pm.expect(totalItems).to.not.be.null;",
+							"});",
+							"",
+							"// Assert total items is a number",
+							"pm.test(\"Total items header is a number\", function () {",
+							"    pm.expect(totalItems).to.match(/^[0-9]+$/);",
+							"});",
+							"",
+							"// Assert current page and limit",
+							"pm.test(\"Current page and limit are correct\", function () {",
+							"    pm.expect(jsonData).to.have.lengthOf(10);",
+							"    pm.expect(currentPage).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "_page",
+							"value": "1"
+						},
+						{
+							"key": "_limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Pagination Response (110 Items)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extracting response data",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Check for pagination headers or elements (if any)",
+							"var totalItems = pm.response.headers.get('x-total-count'); // Simulated header for total items",
+							"var currentPage = 1; // Page number we requested",
+							"",
+							"// Parse the request URL",
+							"var url = pm.request.url.toString();",
+							"var queryParams = pm.request.url.query.toObject();",
+							"",
+							"// Assume we are checking for a parameter named 'limit'",
+							"var paramName = '_limit';",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the number of items is > X-total-count",
+							"pm.test(\"Request contains limit number more than total items\", function () {",
+							"    // pm.expect(jsonData.length).to.above(100);",
+							"        var limitValue = parseInt(queryParams[paramName], 10);",
+							"    pm.expect(limitValue).to.be.above(parseInt(totalItems, 10));",
+							"});",
+							"",
+							"// Check if the response is an array (list of items)",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});",
+							"",
+							"// Assert total items header is present",
+							"pm.test(\"Total items header is present\", function () {",
+							"    pm.expect(totalItems).to.not.be.null;",
+							"});",
+							"",
+							"// Assert total items is a number",
+							"pm.test(\"Total items header is a number\", function () {",
+							"    pm.expect(totalItems).to.match(/^[0-9]+$/);",
+							"});",
+							"",
+							"// // Assert current page and limit",
+							"// pm.test(\"Current page and limit are correct\", function () {",
+							"//     pm.expect(jsonData).to.have.lengthOf(110);",
+							"//     pm.expect(currentPage).to.eql(1);",
+							"// });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=110",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "_page",
+							"value": "1"
+						},
+						{
+							"key": "_limit",
+							"value": "110"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
