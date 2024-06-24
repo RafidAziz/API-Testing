@@ -49,9 +49,6 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 
 ## Backlog (subject to changes)
 - Input validation test cases
-- Security testing test cases
 
 ## Current Task
--  Pagination test case
-      - Add status code 200 assertions
-      - Sort assertions (request top, response bottom)
+-  Security testing test case
