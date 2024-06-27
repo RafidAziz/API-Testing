@@ -48,9 +48,11 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Invalid Sorted Data Response
 - Valid Pagination
 - Invalid Pagination
+- SQL Injection Attack Handling
+- Cross-Site Scripting (XSS) Attack Handling
 
 ## Backlog (subject to changes)
 - Input validation test cases
 
 ## Current Task
--  Security testing test case
+-  Security testing test cases
