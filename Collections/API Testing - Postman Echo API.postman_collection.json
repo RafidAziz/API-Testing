@@ -1703,6 +1703,101 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test SQL Injection Handling",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Assert response for SQL injection attempt",
+							"pm.test(\"SQL injection attempt behaves as expected. No additional records are returned\", function () {",
+							"    pm.expect(pm.response.json().args.username).to.eql(\"rafidaziz OR '1'='1'\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?username=rafidaziz OR '1'='1'",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "rafidaziz OR '1'='1'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cross-Site Scripting Handling",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains the script tag exactly  as it was inputted (script was not executed)\", function () {",
+							"    // Parse the response body",
+							"    var response = pm.response.json();",
+							"",
+							"    // Check if the response body contains the script tag without execution",
+							"    pm.expect(response.data.name).to.eql(\"<script>alert('XSS');</script>\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"<script>alert('XSS');</script>\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
