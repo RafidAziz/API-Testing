@@ -50,6 +50,8 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 - Invalid Pagination
 - SQL Injection Attack Handling
 - Cross-Site Scripting (XSS) Attack Handling
+- Sensitive Data Exposure
+- Cross-Site Request Forgery (CSRF) Attack Handling
 
 ## Backlog (subject to changes)
 - Input validation test cases
