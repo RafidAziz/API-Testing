@@ -1879,6 +1879,119 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Valid Input Validation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"validInput\", \"This is a valid input\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test Script",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains valid data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"args\");",
+							"    pm.expect(jsonData.args).to.have.property(\"foo\", pm.environment.get(\"validInput\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo={{validInput}}",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "{{validInput}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Input Validation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"invalidInput\", \"This is an invalid input\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test Script",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains invalid data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"args\");",
+							"    pm.expect(jsonData.args).to.have.property(\"foo\", pm.environment.get(\"invalidInput\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo={{invalidInput}}",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "{{invalidInput}}"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
