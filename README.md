@@ -5,7 +5,7 @@ It is an ongoing work in progress.
 
 ## Collection Execution Demo
 
-https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a575-ebb1e108317b
+https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acfe-82ca1056dc4a
 
 ## Execution Instructions
 - Open Postman
@@ -59,4 +59,4 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/9273e67f-16f1-411a-a57
 
 
 ## Current Task
--  Update demo execution video
+-  Integrate with CI/CD pipeline
