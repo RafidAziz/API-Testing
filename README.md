@@ -59,4 +59,4 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 
 
 ## Current Task
--  Integrate with CI/CD pipeline
+-  Read best practices of API testing
