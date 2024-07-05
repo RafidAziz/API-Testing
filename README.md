@@ -56,7 +56,11 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - Invalid Input Validation
 
 ## Backlog (subject to changes)
-
+- Automate collection execution via Postman CLI + Jenkins CI/CD
+  - Set up Jenkins pipeline
+  - Put Postman CLI command in  Jenkins pipeline
+  - Run Jenkins pipeline
+  - Verify automation results
 
 ## Current Task
 -  Read best practices of API testing
