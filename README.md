@@ -58,4 +58,4 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 ## Backlog (subject to changes)
 
 ## Current Task
--  Read best practices
+-  Assert endpoint: Get UTF8 Encoded Response
