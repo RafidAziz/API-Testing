@@ -54,8 +54,9 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - Cross-Site Request Forgery (CSRF) Attack Handling
 - Valid Input Validation
 - Invalid Input Validation
+- Get UTF8 Encoded Response
 
 ## Backlog (subject to changes)
 
 ## Current Task
--  Assert endpoint: Get UTF8 Encoded Response
+-  Write assertions for endpoint: GZIP Compressed Response
