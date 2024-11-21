@@ -2030,6 +2030,48 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GZIP Compressed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key value 'gzipped: true'\", function () {",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody).to.have.property('gzipped').that.is.true;",
+							"});",
+							"",
+							"pm.test(\"Response header contains key value 'Content-Encoding: gzip'\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Encoding')).to.equal('gzip');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/gzip",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"gzip"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
