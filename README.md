@@ -61,5 +61,4 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 ## Backlog (subject to changes)
 
 ## Current Task
--  Write assertions for endpoint: IP Address in JSON Format
-  -  Assert valid IP address format
+-  Write assertions for endpoint: IP Address in JSON Format > Assert valid IP address format
