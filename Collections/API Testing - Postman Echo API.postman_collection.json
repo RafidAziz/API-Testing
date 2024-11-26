@@ -2072,6 +2072,91 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Deflate Compressed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"// response code 200",
+							"// response body contains 'deflated: true'",
+							"// response header contains 'accept-encoding: deflate'",
+							"pm.test(\"Response code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key-value 'deflated: true'\", function () {",
+							"     var responseBody = pm.response.json();",
+							"     pm.expect(responseBody).to.have.property('deflated', true);",
+							"});",
+							"",
+							"// Test to check if the response header contains 'accept-encoding: deflate'",
+							"pm.test(\"Response header contains key-value 'content-encoding: deflate'\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Encoding')).to.equal('deflate');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/deflate",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"deflate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IP Address in JSON Format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key 'ip'\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('ip');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/ip",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"ip"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
