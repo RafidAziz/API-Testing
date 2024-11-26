@@ -55,8 +55,11 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - Valid Input Validation
 - Invalid Input Validation
 - Get UTF8 Encoded Response
+- GZip Compressed Response
+- Deflate Compressed Response
 
 ## Backlog (subject to changes)
 
 ## Current Task
--  Write assertions for endpoint: GZIP Compressed Response
+-  Write assertions for endpoint: IP Address in JSON Format
+  -  Assert valid IP address format
