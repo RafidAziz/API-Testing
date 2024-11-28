@@ -1,0 +1,2166 @@
+{
+	"info": {
+		"_postman_id": "d0471b6b-fad2-4737-941f-293ab2fed408",
+		"name": "API Testing - Postman Echo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34303852"
+	},
+	"item": [
+		{
+			"name": "Test GET response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "postman-echo.com/get",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test GET with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body",
+							"let responseJson = pm.response.json();",
+							"",
+							"// Check if the response status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the response body has the correct structure",
+							"pm.test(\"Response has args object\", function () {",
+							"    pm.expect(responseJson).to.have.property('args');",
+							"});",
+							"",
+							"// Validate the response body contains the correct query parameters",
+							"pm.test(\"Response contains correct query parameters\", function() {",
+							"    pm.expect(responseJson.args).to.have.property('key1', 'value1');",
+							"    pm.expect(responseJson.args).to.have.property('key2', 'value2');",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "postman-echo.com/get?key1=value1&key2=value2",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "key1",
+							"value": "value1"
+						},
+						{
+							"key": "key2",
+							"value": "value2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test POST response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function () {",
+							"    Object.keys(queryParams).forEach(function (key) {",
+							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/post?user1=rafid1&user2=rafid2&user3=rafid3",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "user1",
+							"value": "rafid1"
+						},
+						{
+							"key": "user2",
+							"value": "rafid2"
+						},
+						{
+							"key": "user3",
+							"value": "rafid3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test PUT response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function () {",
+							"    Object.keys(queryParams).forEach(function (key) {",
+							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/put?test=put request",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"put"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "put request"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test PATCH response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function () {",
+							"    Object.keys(queryParams).forEach(function (key) {",
+							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/patch?test=patch request",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"patch"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "patch request"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test DELETE response with parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Extract query parameters from the request",
+							"let queryParams = pm.request.url.query.toObject();",
+							"console.log('Query Parameters:', queryParams);",
+							"",
+							"// Validate that each query parameter is present in the response",
+							"pm.test('Response contains all query parameters', function () {",
+							"    Object.keys(queryParams).forEach(function (key) {",
+							"        pm.expect(pm.response.text()).to.include(queryParams[key]);",
+							"    });",
+							"});",
+							"",
+							"// Validate date header exists",
+							"pm.test(\"Header date exists\", function(){",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"// Response time check",
+							"pm.test(\"Response time is less than 500ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/delete?test=delete",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "delete"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Basic Authentication",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Log the entire response to inspect its structure",
+							"console.log(jsonData);",
+							"",
+							"// Check if the response status is 200 OK",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the 'authenticated' property is true",
+							"pm.test(\"User is authenticated\", function () {",
+							"    pm.expect(jsonData.authenticated).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "postman",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/basic-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"basic-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Basic Authentication",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the response status is 401 Unauthorized",
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"// Check if the response body contains the correct error message",
+							"pm.test(\"Error message is correct. User is not authenticated\", function () {",
+							"    const responseText = pm.response.text();",
+							"    pm.expect(responseText).to.include('Unauthorized');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "invalid_password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "invalid_user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/basic-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"basic-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Digest Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Check if the response status is 200 OK",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the 'authenticated' property is true",
+							"pm.test(\"User is authenticated\", function () {",
+							"    pm.expect(jsonData.authenticated).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "postman",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/digest-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"digest-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Digest Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the response status is 401 Unauthorized",
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"// Check if the response body contains the correct error message",
+							"pm.test(\"Error message is correct. User is not authenticated\", function () {",
+							"    const responseText = pm.response.text();",
+							"    pm.expect(responseText).to.include('Unauthorized');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "password",
+							"value": "invalid_password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "invalid_user",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/digest-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"digest-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Hawk Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"User is authenticated. Response body contains 'Hawk Authentication Successful' message\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.json()).to.deep.include({ message: \"Hawk Authentication Successful\" });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "hawk",
+					"hawk": [
+						{
+							"key": "authKey",
+							"value": "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn",
+							"type": "string"
+						},
+						{
+							"key": "authId",
+							"value": "dh37fgj492je",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "sha256",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/auth/hawk",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"auth",
+						"hawk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Hawk Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Error message is correct: 'Unauthorized'\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.error).to.eql(\"Unauthorized\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "hawk",
+					"hawk": [
+						{
+							"key": "authKey",
+							"value": "invalid-key",
+							"type": "string"
+						},
+						{
+							"key": "authId",
+							"value": "invalid-id",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "sha256",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/auth/hawk",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"auth",
+						"hawk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Oauth1.0a Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check that the response status code is 200 for a valid request",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check that the response contains status pass",
+							"pm.test(\"Response body contains status pass\", function () {",
+							"        pm.response.to.have.jsonBody('status', 'pass');",
+							"});",
+							"",
+							"// Check that the response contains status pass",
+							"pm.test(\"Response body contains message OAuth-1.0a signature verification was successful\", function () {",
+							"        pm.response.to.have.jsonBody('message', 'OAuth-1.0a signature verification was successful');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "D+EdQ-gs$-%@2Nu7",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "RKCGzna7bv9YD57c",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/oauth1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"oauth1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Oauth1.0a Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check that the response status code is 200 for a valid request",
+							"pm.test(\"Response status is 401 Unauthorized\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"// Check that the response contains status fail",
+							"pm.test(\"Response body contains status pass\", function () {",
+							"        pm.response.to.have.jsonBody('status', 'fail');",
+							"});",
+							"",
+							"// Check that the response contains status pass",
+							"pm.test(\"Response body contains message HMAC-SHA1 verification failed\", function () {",
+							"        pm.response.to.have.jsonBody('message', 'HMAC-SHA1 verification failed');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "INVALID_CONSUMER_SECRET",
+							"type": "string"
+						},
+						{
+							"key": "tokenSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "RKCGzna7bv9YD57c",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/oauth1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"oauth1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Set Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are set correctly\", function () {",
+							"    var cookie1 = pm.environment.get(\"cookie1\");",
+							"    var value1 = pm.environment.get(\"value1\");",
+							"    var cookie2 = pm.environment.get(\"cookie2\");",
+							"    var value2 = pm.environment.get(\"value2\");",
+							"",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.cookies[cookie1]).to.eql(value1);",
+							"    pm.expect(jsonData.cookies[cookie2]).to.eql(value2);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"cookie1\", \"rafidkey1\");",
+							"pm.environment.set(\"value1\", \"rafidvalue1\");",
+							"",
+							"pm.environment.set(\"cookie2\", \"rafidkey2\");",
+							"pm.environment.set(\"value2\", \"rafidvalue2\");",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/set?rafidkey1=rafidvalue1&rafidkey2=rafidvalue2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"set"
+					],
+					"query": [
+						{
+							"key": "rafidkey1",
+							"value": "rafidvalue1"
+						},
+						{
+							"key": "rafidkey2",
+							"value": "rafidvalue2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Get Cookies",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.request.headers.add({ key: 'Cookie', value: 'rafidkey1=rafidvalue1; rafidkey2=rafidvalue2' });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are correct\", function () {",
+							"    // Retrieve the cookies from the response",
+							"    const responseCookies = pm.response.json().cookies;",
+							"",
+							"    // Define the expected cookies",
+							"    const expectedCookies = {",
+							"        \"rafidkey1\": \"rafidvalue1\",",
+							"        \"rafidkey2\": \"rafidvalue2\"",
+							"    };",
+							"",
+							"    // Iterate through the expected cookies and check each one",
+							"    Object.keys(expectedCookies).forEach(function(key) {",
+							"        pm.expect(responseCookies[key]).to.eql(expectedCookies[key]);",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Delete Existing Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Cookies are deleted correctly\", function () {",
+							"    // Retrieve cookies from the response",
+							"    var cookie1 = pm.cookies.get('rafidkey1');",
+							"    var cookie2 = pm.cookies.get('rafidkey2');",
+							"",
+							"    // Assert that cookies are not present",
+							"    pm.expect(cookie1).to.be.undefined;",
+							"    pm.expect(cookie2).to.be.undefined;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/delete?rafidkey1&rafidkey2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "rafidkey1",
+							"value": null
+						},
+						{
+							"key": "rafidkey2",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Delete Non-Existent Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"No cookies deleted as the provided key is non-existent\", function () {",
+							"    // Retrieve cookies from the response",
+							"    var cookie1 = pm.cookies.get('invalidkey1');",
+							"",
+							"    // Assert that cookies are not present",
+							"    pm.expect(cookie1).to.be.undefined;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/delete?invalidkey1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "invalidkey1",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Response Status Code 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/status/200",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"status",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Response Status Code 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/status/invalid",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"status",
+						"invalid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Response Status Code 401",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the response status is 401 Unauthorized",
+							"pm.test(\"Response status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "invalid_password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "invalid_user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/basic-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"basic-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Response Status Code 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/statue/",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"statue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Streamed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has chunked transfer encoding header\", function () {",
+							"    pm.response.to.have.header('transfer-encoding', 'chunked');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "POST https://postman-echo.com/post\nContent-Type: application/json\n\n{\n  \"large_payload\": \"a\" * 1000000\n  \"test\": 0 / 0\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/stream/5",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"stream",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Delay Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var _ = require('lodash');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has valid json body\", function () {",
+							"    pm.response.to.have.jsonBody('delay');",
+							"});",
+							"",
+							"// additional sanity tests",
+							"pm.test(\"Request must have a valid delay (1-9)\", function () {",
+							"    pm.expect(Number(_.get(pm.request, 'url.path[1]'))).to.be.above(0).and.below(10);",
+							"});",
+							"pm.test(\"Response should take more time than the delay specified\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(Number(_.get(pm.request, 'url.path[1]')));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/delay/2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Delay Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var _ = require('lodash');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has valid json body\", function () {",
+							"    pm.response.to.have.jsonBody('delay');",
+							"});",
+							"",
+							"// additional sanity tests",
+							"pm.test(\"Request contains invalid delay (<1 OR >9)\", function () {",
+							"    pm.expect(Number(_.get(pm.request, 'url.path[1]'))).to.be.below(1).and.above(9);",
+							"});",
+							"pm.test(\"Response should take more time than the delay specified\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.above(Number(_.get(pm.request, 'url.path[1]')));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/delay/0",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Sorted Data Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response data is not sorted in ascending order\", function () {",
+							"    // Extract the 'data' parameters from the URL",
+							"    let data = pm.request.url.query",
+							"        .filter(param => param.key === 'data')",
+							"        .map(param => parseInt(param.value, 10));",
+							"    ",
+							"    // Create a copy of the data array and sort it",
+							"    let sortedData = [...data].sort((a, b) => a - b);",
+							"    ",
+							"    // Assert that the original data array is sorted",
+							"    pm.expect(data).not.to.eql(sortedData);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?data=3&data=1&data=2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "data",
+							"value": "3"
+						},
+						{
+							"key": "data",
+							"value": "1"
+						},
+						{
+							"key": "data",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Valid Pagination Response (10 Items)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extracting response data",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Parse the request URL",
+							"var queryParams = pm.request.url.query.toObject();",
+							"",
+							"// Get total items",
+							"var totalItems = pm.response.headers.get('x-total-count');",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check request contains limit <= 'x-total-count'",
+							"pm.test(\"Request contains limit value <= total items\", function () {",
+							"    var limitValue = parseInt(queryParams['_limit'], 10);",
+							"    pm.expect(limitValue).to.be.below(parseInt(totalItems, 10));",
+							"});",
+							"",
+							"// Check if the response is an array (list of items)",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});",
+							"",
+							"// Check if the number of items is equal to the limit specified",
+							"pm.test(\"Response contains 10 items\", function () {",
+							"    pm.expect(jsonData.length).to.eql(parseInt(queryParams['_limit'], 10));",
+							"});",
+							"",
+							"// Check for pagination headers or elements (if any)",
+							"var totalItems = pm.response.headers.get('x-total-count'); // Simulated header for total items",
+							"var currentPage = 1; // Page number we requested",
+							"",
+							"// Assert total items header is present",
+							"pm.test(\"Total items header is present\", function () {",
+							"    pm.expect(totalItems).to.not.be.null;",
+							"});",
+							"",
+							"// Assert total items is a number",
+							"pm.test(\"Total items header is a number\", function () {",
+							"    pm.expect(totalItems).to.match(/^[0-9]+$/);",
+							"});",
+							"",
+							"// Assert current page and limit",
+							"pm.test(\"Current page and limit are correct\", function () {",
+							"    pm.expect(jsonData).to.have.lengthOf(10);",
+							"    pm.expect(currentPage).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "_page",
+							"value": "1"
+						},
+						{
+							"key": "_limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Invalid Pagination Response (110 Items)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Extracting response data",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Check for pagination headers or elements (if any)",
+							"var totalItems = pm.response.headers.get('x-total-count'); // Simulated header for total items",
+							"var currentPage = 1; // Page number we requested",
+							"",
+							"// Parse the request URL",
+							"var url = pm.request.url.toString();",
+							"var queryParams = pm.request.url.query.toObject();",
+							"",
+							"// Assume we are checking for a parameter named 'limit'",
+							"var paramName = '_limit';",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check if the number of items is > X-total-count",
+							"pm.test(\"Request contains limit number more than total items\", function () {",
+							"    // pm.expect(jsonData.length).to.above(100);",
+							"        var limitValue = parseInt(queryParams[paramName], 10);",
+							"    pm.expect(limitValue).to.be.above(parseInt(totalItems, 10));",
+							"});",
+							"",
+							"// Check if the response is an array (list of items)",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});",
+							"",
+							"// Assert total items header is present",
+							"pm.test(\"Total items header is present\", function () {",
+							"    pm.expect(totalItems).to.not.be.null;",
+							"});",
+							"",
+							"// Assert total items is a number",
+							"pm.test(\"Total items header is a number\", function () {",
+							"    pm.expect(totalItems).to.match(/^[0-9]+$/);",
+							"});",
+							"",
+							"// // Assert current page and limit",
+							"// pm.test(\"Current page and limit are correct\", function () {",
+							"//     pm.expect(jsonData).to.have.lengthOf(110);",
+							"//     pm.expect(currentPage).to.eql(1);",
+							"// });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?_page=1&_limit=110",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "_page",
+							"value": "1"
+						},
+						{
+							"key": "_limit",
+							"value": "110"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test SQL Injection Handling",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Assert response for SQL injection attempt",
+							"pm.test(\"SQL injection attempt behaves as expected. No additional records are returned\", function () {",
+							"    pm.expect(pm.response.json().args.username).to.eql(\"rafidaziz OR '1'='1'\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?username=rafidaziz OR '1'='1'",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "rafidaziz OR '1'='1'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cross-Site Scripting Handling",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains the script tag exactly  as it was inputted (script was not executed)\", function () {",
+							"    // Parse the response body",
+							"    var response = pm.response.json();",
+							"",
+							"    // Check if the response body contains the script tag without execution",
+							"    pm.expect(response.data.name).to.eql(\"<script>alert('XSS');</script>\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"<script>alert('XSS');</script>\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Sensitive Data Exposure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No Sensitive Data Exposure: password, credit card\", function () {",
+							"  pm.expect(pm.response.text()).to.not.include(\"password\");",
+							"  pm.expect(pm.response.text()).to.not.include(\"credit card\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Cross-Site Request Forgery Handling",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// In a real-world scenario, CSRF tokens are typically generated by your application and included in requests to prevent unauthorized actions. For simulation purposes, we will use csrf_token=abcd1234.",
+							"",
+							"// Extract CSRF token from response",
+							"var responseBody = pm.response.json();",
+							"var csrfToken = responseBody.args.csrf_token;",
+							"",
+							"// Assert CSRF token is present and matches expected value",
+							"pm.test(\"CSRF token is valid\", function () {",
+							"    pm.expect(csrfToken).to.eql(\"abcd1234\"); // Replace with your expected CSRF token value",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?csrf_token=abcd1234",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "csrf_token",
+							"value": "abcd1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Input Validation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"validInput\", \"This is a valid input\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test Script",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains valid data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"args\");",
+							"    pm.expect(jsonData.args).to.have.property(\"foo\", pm.environment.get(\"validInput\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo={{validInput}}",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "{{validInput}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Input Validation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"invalidInput\", \"This is an invalid input\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test Script",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains invalid data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"args\");",
+							"    pm.expect(jsonData.args).to.have.property(\"foo\", pm.environment.get(\"invalidInput\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo={{invalidInput}}",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "{{invalidInput}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get UTF8 Encoded Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains charset utf8 in content-type header\", function(){",
+							"    pm.response.to.have.header('content-type', 'text/html; charset=utf-8')",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/encoding/utf8",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"encoding",
+						"utf8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GZIP Compressed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key value 'gzipped: true'\", function () {",
+							"    var responseBody = pm.response.json();",
+							"    pm.expect(responseBody).to.have.property('gzipped').that.is.true;",
+							"});",
+							"",
+							"pm.test(\"Response header contains key value 'Content-Encoding: gzip'\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Encoding')).to.equal('gzip');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/gzip",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"gzip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deflate Compressed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"// response code 200",
+							"// response body contains 'deflated: true'",
+							"// response header contains 'accept-encoding: deflate'",
+							"pm.test(\"Response code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key-value 'deflated: true'\", function () {",
+							"     var responseBody = pm.response.json();",
+							"     pm.expect(responseBody).to.have.property('deflated', true);",
+							"});",
+							"",
+							"// Test to check if the response header contains 'accept-encoding: deflate'",
+							"pm.test(\"Response header contains key-value 'content-encoding: deflate'\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Encoding')).to.equal('deflate');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/deflate",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"deflate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IP Address in JSON Format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body contains key 'ip'\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('ip');",
+							"});",
+							"",
+							"pm.test(\"Response body contains a valid IP address format\", function () {",
+							"    var responseData = pm.response.json();",
+							"    pm.expect(responseData.ip).to.match(/^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$/);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/ip",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"ip"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
