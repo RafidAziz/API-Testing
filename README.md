@@ -57,8 +57,9 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - Get UTF8 Encoded Response
 - GZip Compressed Response
 - Deflate Compressed Response
+- IP Address in JSON Format
 
 ## Backlog (subject to changes)
 
 ## Current Task
--  Write assertions for endpoint: IP Address in JSON Format > Assert valid IP address format
+-  Write assertions for endpoint: Current UTC Time
