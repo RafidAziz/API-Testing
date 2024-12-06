@@ -2161,6 +2161,110 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Current UTC Time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// status code is 200",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// response is in text format",
+							"pm.test(\"Response is in text html\", function(){",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html\");",
+							"});",
+							"",
+							"// response UTC time equals actual UTC time",
+							"pm.test(\"Response UTC time equals actual UTC time\", function () {",
+							"    const actualUTCTime = new Date().toUTCString();",
+							"    pm.expect(pm.response.text()).to.equal(actualUTCTime);",
+							"});",
+							"",
+							"// response UTC time format contains day, date and time",
+							"pm.test(\"Response UTC time format contains day, date, and time\", function () {",
+							"    pm.expect(pm.response.text()).to.match(/[A-Za-z]{3}, \\d{2} [A-Za-z]{3} \\d{4} \\d{2}:\\d{2}:\\d{2} [A-Za-z]{3}/);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/time/now",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"time",
+						"now"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timestamp Validity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// response status code is 200",
+							"pm.test(\"response status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// response body is in json format",
+							"pm.test(\"response body is in json format\", function() {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// response body contains key-value 'valid: true'",
+							"pm.test(\"response body contains key-value 'valid: true'\", function(){",
+							"    pm.expect(pm.response.json()).to.eql({valid: true});",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/time/valid?timestamp=2016-10-10",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"time",
+						"valid"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "2016-10-10"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
