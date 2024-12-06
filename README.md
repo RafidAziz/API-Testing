@@ -58,9 +58,10 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - GZip Compressed Response
 - Deflate Compressed Response
 - IP Address in JSON Format
+- Current UTC Time
+- Timestamp validity
 
 ## Backlog (subject to changes)
 
 ## Current Task
--  Write assertions for endpoint: Current UTC Time
--  Write assertions for endpoint: Timestamp validity
+- Write assertions for endpoint: Format timestamp
