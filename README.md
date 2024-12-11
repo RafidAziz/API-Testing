@@ -60,8 +60,9 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - IP Address in JSON Format
 - Current UTC Time
 - Timestamp validity
+- Format timestamp
 
 ## Backlog (subject to changes)
 
 ## Current Task
-- Write assertions for endpoint: Format timestamp
+- Write assertions for endpoint: Extract timestamp unit
