@@ -2265,6 +2265,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Format Timestamp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// response status code is 200",
+							"pm.test('response status code is 200', function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// response body contains key 'format'",
+							"pm.test(\"response is in json and body contains key 'format'\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+							"    pm.response.to.have.jsonBody('format');",
+							"    ",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/time/format?timestamp=2016-10-10&format=mm",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"time",
+						"format"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "2016-10-10"
+						},
+						{
+							"key": "format",
+							"value": "mm"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
