@@ -2319,6 +2319,54 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Extract timestamp unit year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function(){",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test(\"json body contains key:value 'unit:2016'\", function(){",
+							"    pm.response.to.have.jsonBody(\"unit\", 2016)",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/time/unit?timestamp=2016-1-1&unit=year",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"time",
+						"unit"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "2016-1-1"
+						},
+						{
+							"key": "unit",
+							"value": "year"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
