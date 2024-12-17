@@ -61,8 +61,9 @@ https://github.com/RafidAziz/API-Testing/assets/167278169/a136d0ac-4ecc-4a59-acf
 - Current UTC Time
 - Timestamp validity
 - Format timestamp
+- Extract timestamp unit
 
 ## Backlog (subject to changes)
 
 ## Current Task
-- Write assertions for endpoint: Extract timestamp unit
+- Write assertions for endpoint: Time addition 
